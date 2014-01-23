@@ -1,16 +1,23 @@
-####Welcome to the main page for /u/godwin_finder
+####Welcome to the source of /u/godwin_finder
 ***
 
-######[Frequently asked questions](http://www.reddit.com/r/godwinbot/wiki/faq)
-Any questions about this bot? Check this page to see if they are already answered, otherwise posts away!
+## About the source
+=====
 
-######[List of banned subreddits](http://www.reddit.com/r/godwinbot/wiki/ban)
+#####godwin.py 
+This is the main script for commenting on submissions. You may use the code in this script for your own purpose but please do not just download and re-use the code for the same purpose as I do. 
 
-Curious where /u/godwin_finder has been banned? Check this page to find out.
+####delete_bot.py
+This is the script for deleting negative karma comments. And ones with a reply of delete. Do what you wnat with this script you can use it in your own code or edit it. You do not need to give any credit
 
-######[Update Log](http://www.reddit.com/r/godwinbot/wiki/change)
 
-If you want to know the latest changes of this bot click here
+
+
+
+
+
+######[Frequently asked questions](http://www.reddit.com/r/godwinbot/wiki/index)
+This is the main wiki page (on reddit) for this bot
 
 
 
