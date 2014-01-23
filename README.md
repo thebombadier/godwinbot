@@ -16,7 +16,7 @@ This is the script for deleting negative karma comments. And ones with a reply o
 
 
 
-######[Frequently asked questions](http://www.reddit.com/r/godwinbot/wiki/index)
+######[Main wiki page](http://www.reddit.com/r/godwinbot/wiki/index)
 This is the main wiki page (on reddit) for this bot
 
 
