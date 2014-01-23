@@ -1,13 +1,13 @@
-####Welcome to the source of /u/godwin_finder
-***
+###Welcome to the source of /u/godwin_finder
+====
 
-## About the source
-=====
+####About the source
+***
 
 #####godwin.py 
 This is the main script for commenting on submissions. You may use the code in this script for your own purpose but please do not just download and re-use the code for the same purpose as I do. 
 
-####delete_bot.py
+#####delete_bot.py
 This is the script for deleting negative karma comments. And ones with a reply of delete. Do what you wnat with this script you can use it in your own code or edit it. You do not need to give any credit
 
 
