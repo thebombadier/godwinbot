@@ -27,7 +27,7 @@ def add_to_ban(id_p):
     with open('ban.txt', 'a') as file:
         file.write(id_p + '\n')
     file.close()
-    r.edit_wiki_page('testingground4bots','ban',"* " + id_p + "\n\n",'I was banned from' + id_p)
+    r.edit_wiki_page('godwinbot','ban',"* " + id_p + "\n\n",'I was banned from' + id_p)
     
 def read_list(var):
     f = open('posts.txt', 'r')
@@ -64,7 +64,7 @@ def contains(selftext,words,sub_id,submission,done):
         if has_nazi_text or has_nazi_title:
             some = 0
             
-            return "Nazi referenced in submission: " + submission.title + " so no c0mment made " 
+            return "Nazi referenced in submission: " + submission.title + " so no comment made " 
             
             
         flat = praw.helpers.flatten_tree(submission.comments)
@@ -111,9 +111,9 @@ def contains(selftext,words,sub_id,submission,done):
         
             
 r = praw.Reddit("Godwin's Law bot by /u/the_bombadier"
-                "http://www.github.com/thebombadier"
+                "http://www.github.com/thebombadier/godwinbot"
                 )
-print login('godwin_finder','LYceum98')
+print login('username','password')
 
 subreddit = r.get_subreddit('all')
 try:
