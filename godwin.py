@@ -82,7 +82,7 @@ def contains(selftext,words,sub_id,submission,done):
                         text = " comment"
                     try:
                         
-                        comment.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + " and " + str(amount) + text + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^/u/" + comment.author.name + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
+                        comment.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + " and " + str(amount) + text + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + comment.author.name + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
                         return "Nazi reference in comment by " + comment.author.name + " Comment: " + comment.body
                         time.sleep(300)
                         break
@@ -113,20 +113,21 @@ def contains(selftext,words,sub_id,submission,done):
 r = praw.Reddit("Godwin's Law bot by /u/the_bombadier"
                 "http://www.github.com/thebombadier/godwinbot"
                 )
-print login('username','password')
+print login('godwin_finder','LYceum98')
 
-subreddit = r.get_subreddit('all')
+subreddit = r.get_comments('all')
 try:
     while True:
         words = ["nazi", "hitler"]
         done = []
         read_list(done)
-        for submission in subreddit.get_hot(limit=50):
+        for comment in subreddit
             
-            if submission.id + '\n' not in done:
-                submission.replace_more_comments(limit=8, threshold=5)
+            if comment.id + '\n' not in done:
+                post = comment.submission
+		selftext = post.selftext.lower()
             
-                print contains(submission.selftext.lower(),words,submission.id,submission,done)
+                print contains(selftext,words,post.id,post,done)
 except:
      print "Unexpected error:", sys.exc_info()[0]
      add_to_error(traceback.format_exc())
