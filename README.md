@@ -5,10 +5,10 @@
 ***
 
 #####godwin.py 
-This is the main script for commenting on submissions. You may use the code in this script for your own purpose but please do not just download and re-use the code for the same purpose as I do. 
+This is the main script for commenting on submissions. You may use the code in this script for your own purpose but please do not simply make a copy of my bot and claim it as your own
 
 #####delete_bot.py
-This is the script for deleting negative karma comments. And ones with a reply of delete. Do what you wnat with this script you can use it in your own code or edit it. You do not need to give any credit
+This is the script for deleting negative karma comments. And ones with a reply of delete. I encrouage you to use this script in your own bots, and you can do what you want with it. No credit is neccesary
 
 
 
@@ -16,7 +16,7 @@ This is the script for deleting negative karma comments. And ones with a reply o
 
 
 
-######[Main wiki page](http://www.reddit.com/r/godwinbot/wiki/index)
+#####[Main wiki page](http://www.reddit.com/r/godwinbot/wiki/index)
 This is the main wiki page (on reddit) for this bot
 
 
