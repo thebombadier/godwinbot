@@ -22,8 +22,8 @@ def read_list(var):
     f.close()
     
 r = praw.Reddit('delete negative karama comments for /u/godwin_finder by /u/the_bombadier')
-username = 'Username'      
-r.login(username,'password')
+username = 'godwin_finder'      
+r.login(username,'LYceum98')
 already_done = []
 read_list(already_done)
 user = r.get_redditor(username)
