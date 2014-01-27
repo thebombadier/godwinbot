@@ -59,7 +59,7 @@ def contains(selftext,words,sub_id,submission,done):
     some = 0
     read_list(done)
     amount = 0
-    nazi = ["holocaust","jews","nazi","hitler","ww2","war"]
+    nazi = ["holocaust","jews","nazi","hitler","ww2","war","german"]
     if sub_id + '\n' not in done and str(submission.subreddit) not in badsubs and len(selftext)< 4000:
 	has_nazi_text = any(string in selftext.lower() for string in words)
    	has_nazi_title = any(string in submission.title.lower() for string in nazi)
