@@ -23,15 +23,24 @@ def add_to_list(id_p):
         file.write(id_p + '\n')
     file.close()
 
-def add_to_ban(id_p,badsubs):    
+def read_ban(var):
+    f = open('ban.txt', 'r')
+    for line in f:
+        var.append(line)
+    f.close()
+
+def add_to_ban(id_p,badsubs):  
+    read_ban(badsubs)  
     with open('ban.txt', 'a') as file:        
-        file.write(id_p + '\n')    file.close()
-        if id_p not in badsubs:
-            wiki = r.get_wiki_page('godwinbot','ban')
-            r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * **" + id_p + "**",'I was banned from' + id_p)
-            return "Added sub to wiki"
-        else:
-            return "Already Banned"
+        file.write(id_p + '\n')    
+    file.close()
+    if id_p + '\n' not in badsubs:
+        wiki = r.get_wiki_page('godwinbot','ban')
+        print wiki.content_md + "* **" + id_p + "**"
+        r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n* **" + id_p + "**",'I was banned from' + id_p)
+        time.sleep(60) 
+    else:
+        return "Already Banned"
     
 def read_list(var):
     f = open('posts.txt', 'r')
@@ -39,11 +48,7 @@ def read_list(var):
         var.append(line)
     f.close()
 
-def read_ban(var):
-    f = open('ban.txt', 'r')
-    for line in f:
-        var.append(line)
-    f.close()
+
 
 def handle_ratelimit(func, *args, **kwargs):
     while True:
@@ -64,87 +69,88 @@ def contains(selftext,words,sub_id,submission,done):
     nazi_co = 0
     nazi = ["holocaust","jews","nazi","hitler","ww2","war","racism","antisemitism","ethnic","cleansing","semitism","Allies"]
     if sub_id + '\n' not in done and str(submission.subreddit) not in badsubs and len(selftext)< 4000:
-	has_nazi_text = any(string in selftext.lower() for string in words)
-   	has_nazi_title = any(string in submission.title.lower() for string in nazi)
-        add_to_list(submission.id)
-        done.append(submission.id)
-        if has_nazi_text or has_nazi_title:
-            some = 0
+		has_nazi_text = any(string in selftext.lower() for string in words)
+		has_nazi_title = any(string in submission.title.lower() for string in nazi)
+		add_to_list(submission.id)
+		done.append(submission.id)
+		if has_nazi_text or has_nazi_title:
+			some = 0
+
+			return "Nazi referenced in submission: " + submission.title + " so no comment made " 
             
-            return "Nazi referenced in submission: " + submission.title + " so no comment made " 
             
-            
-        flat = praw.helpers.flatten_tree(submission.comments)
-        for comment in flat:
-            amount = amount + 1
-            for nazi in words:
-                if not hasattr(comment, 'body'):
-                    continue
-                if nazi in comment.body.lower() :
-                	nazi_co += 1
-                	
-	                    some = 1
-	                    time1 =  comment.created_utc - submission.created_utc
-	                    if amount > 1:
-	                    	com_word = " comments"
-	                    else:
-	                    	com_word = " comment"
-	                    
-	                    try:
-	                        
-	                        comment.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + "and " + amount + com_word+ " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + comment.author.name + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
-	                        return "Nazi reference in comment by " + comment.author.name + " Comment: " + comment.body
-	                        time.sleep(300)
-	                        break
-	                    except praw.errors.RateLimitExceeded as e:
-	                        print 'Sleeping for ' + str(e.sleep_time) + ' seconds'
-	                        time.sleep(e.sleep_time)
-	                    except Exception as e:
-	                        add_to_error("REPLY FAILED: %s @ %s"%(e,submission.subreddit))
-	                        if str(e) == '403 Client Error: Forbidden':
-	                            badsubs.append(str(submission.subreddit))
-	                            add_to_ban(str(submission.subreddit))
-	                            return "Banned from this subreddit"
-	                    except Exception as e:
-	                        add_to_error(e)
-	                        return "Unidentified error"
-                        
-                
-                    
-                    
-                    
-                    
-                    
-    if some == 0:
-	print str(submission.subreddit)
-        return "No Nazi reference found"
+		flat = praw.helpers.flatten_tree(submission.comments)
+		for comment in flat:
+			amount = amount + 1
+			for nazi in words:
+				if not hasattr(comment, 'body'):
+					continue
+				if nazi in comment.body.lower():
+					nazi_co = nazi_co + 1
+					if nazi_co == 1:
+							sub_post = submission.subreddit
+							time_com = comment.created_utc
+							time_sub = submission.created_utc
+							com_body = comment.body
+							com_name = comment.author.name
+				if nazi_co < 5:
+					some = 1
+					time1 =  time_com - time_sub
+					if amount > 1:
+						com_word = " comments"
+					else:
+						com_word = " comment"
 	
+					try:
+                    
+						comment.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + "and " + amount + com_word + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + com_name + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
+						return "Nazi reference in comment by " + com_name + " Comment: " + com_body
+						time.sleep(300)
+						break
+					except praw.errors.RateLimitExceeded as e:
+						print 'Sleeping for ' + str(e.sleep_time) + ' seconds'
+						time.sleep(e.sleep_time)
+					except Exception as e:
+						add_to_error("REPLY FAILED: %s @ %s"%(e,sub_post))
+						if str(e) == '403 Client Error: Forbidden':
+		
+							add_to_ban(str(sub_post),badsubs)
+							badsubs.append(str(sub_post))
+
+							return "Banned from this subreddit"
+					except Exception as e:
+						add_to_error(e)
+						return str(e)
+				else:
+					return "Too many comments about nazis"              
+    if some == 0:
+		return "No Nazi reference found"
+    
         
         
+
             
 r = praw.Reddit("Godwin's Law bot by /u/the_bombadier"
                 "http://www.github.com/thebombadier/godwinbot"
                 )
-print login('username','password')
+print login('godwin_finder','LYceum98')
 
 
-try:
-    while True:
+
+while True:
+    try:
         words = ["nazi", "hitler"]
         done = []
         read_list(done)
-	number = 1
+        number = 1
         for comment in praw.helpers.comment_stream(r,'all', limit = None):
+            if comment.submission.id + '\n' not in done:
+                post = comment.submission
+                selftext = post.selftext.lower()
             
-	    
+                print contains(selftext,words,post.id,post,done)
+    except:
+         print "Unexpected error:", traceback.format_exc()
+         add_to_error(traceback.format_exc())
+         time.sleep(500)
 
-		if comment.submission.id + '\n' not in done:
-			post = comment.submission
-			selftext = post.selftext.lower()
-	    
-			print contains(selftext,words,post.id,post,done)
-except:
-     print "Unexpected error:", sys.exc_info()[0]
-     add_to_error(traceback.format_exc())
-     time.sleep(500)
-     #Need to add comment checker to see if more comments are about nazi or not
