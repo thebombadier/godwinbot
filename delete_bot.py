@@ -32,7 +32,7 @@ def add_to_ban(id_p,badsubs):
         file.write(id_p + '\n')    file.close()
         if id_p not in badsubs:
             wiki = r.get_wiki_page('godwinbot','ban')
-            r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * " + id_p + "\n\n",'I was banned from' + id_p)
+            r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * **" + id_p + "**",'I was banned from' + id_p)
         else:
             return "Already Banned"
 r = praw.Reddit('delete negative karama comments for /u/godwin_finder by /u/the_bombadier')
