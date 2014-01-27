@@ -28,7 +28,7 @@ def add_to_ban(id_p,badsubs):
         file.write(id_p + '\n')    file.close()
         if id_p not in badsubs:
             wiki = r.get_wiki_page('godwinbot','ban')
-            r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * " + id_p + "\n\n",'I was banned from' + id_p)
+            r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * **" + id_p + "**",'I was banned from' + id_p)
         else:
             return "Already Banned"
     
@@ -59,10 +59,10 @@ def contains(selftext,words,sub_id,submission,done):
     some = 0
     read_list(done)
     amount = 0
-    
+    nazi = ["holocaust","jews","nazi","hitler","ww2","war"]
     if sub_id + '\n' not in done and str(submission.subreddit) not in badsubs and len(selftext)< 4000:
 	has_nazi_text = any(string in selftext.lower() for string in words)
-   	has_nazi_title = any(string in submission.title.lower() for string in words)
+   	has_nazi_title = any(string in submission.title.lower() for string in nazi)
         add_to_list(submission.id)
         done.append(submission.id)
         if has_nazi_text or has_nazi_title:
