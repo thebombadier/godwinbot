@@ -29,6 +29,7 @@ def add_to_ban(id_p,badsubs):
         if id_p not in badsubs:
             wiki = r.get_wiki_page('godwinbot','ban')
             r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * **" + id_p + "**",'I was banned from' + id_p)
+            return "Added sub to wiki"
         else:
             return "Already Banned"
     
@@ -60,7 +61,8 @@ def contains(selftext,words,sub_id,submission,done):
     read_list(done)
     amount = 0
     com_word = ""
-    nazi = ["holocaust","jews","nazi","hitler","ww2","war","german","racism","antisemitism","ethnic","cleansing"]
+    nazi_co = 0
+    nazi = ["holocaust","jews","nazi","hitler","ww2","war","racism","antisemitism","ethnic","cleansing","semitism","Allies"]
     if sub_id + '\n' not in done and str(submission.subreddit) not in badsubs and len(selftext)< 4000:
 	has_nazi_text = any(string in selftext.lower() for string in words)
    	has_nazi_title = any(string in submission.title.lower() for string in nazi)
@@ -79,31 +81,33 @@ def contains(selftext,words,sub_id,submission,done):
                 if not hasattr(comment, 'body'):
                     continue
                 if nazi in comment.body.lower() :
-                    some = 1
-                    time1 =  comment.created_utc - submission.created_utc
-                    if amount > 1:
-                    	com_word = " comments"
-                    else:
-                    	com_word = " comment"
-                    
-                    try:
-                        
-                        comment.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + "and " + amount + com_word+ " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + comment.author.name + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
-                        return "Nazi reference in comment by " + comment.author.name + " Comment: " + comment.body
-                        time.sleep(300)
-                        break
-                    except praw.errors.RateLimitExceeded as e:
-                        print 'Sleeping for ' + str(e.sleep_time) + ' seconds'
-                        time.sleep(e.sleep_time)
-                    except Exception as e:
-                        add_to_error("REPLY FAILED: %s @ %s"%(e,submission.subreddit))
-                        if str(e) == '403 Client Error: Forbidden':
-                            badsubs.append(str(submission.subreddit))
-                            add_to_ban(str(submission.subreddit))
-                            return "Banned from this subreddit"
-                    except Exception as e:
-                        add_to_error(e)
-                        return "Unidentified error"
+                	nazi_co += 1
+                	
+	                    some = 1
+	                    time1 =  comment.created_utc - submission.created_utc
+	                    if amount > 1:
+	                    	com_word = " comments"
+	                    else:
+	                    	com_word = " comment"
+	                    
+	                    try:
+	                        
+	                        comment.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + "and " + amount + com_word+ " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + comment.author.name + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
+	                        return "Nazi reference in comment by " + comment.author.name + " Comment: " + comment.body
+	                        time.sleep(300)
+	                        break
+	                    except praw.errors.RateLimitExceeded as e:
+	                        print 'Sleeping for ' + str(e.sleep_time) + ' seconds'
+	                        time.sleep(e.sleep_time)
+	                    except Exception as e:
+	                        add_to_error("REPLY FAILED: %s @ %s"%(e,submission.subreddit))
+	                        if str(e) == '403 Client Error: Forbidden':
+	                            badsubs.append(str(submission.subreddit))
+	                            add_to_ban(str(submission.subreddit))
+	                            return "Banned from this subreddit"
+	                    except Exception as e:
+	                        add_to_error(e)
+	                        return "Unidentified error"
                         
                 
                     
