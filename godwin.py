@@ -133,7 +133,7 @@ def contains(selftext,words,sub_id,submission,done):
 r = praw.Reddit("Godwin's Law bot by /u/the_bombadier"
                 "http://www.github.com/thebombadier/godwinbot"
                 )
-print login('godwin_finder','LYceum98')
+print login('username','password')
 
 
 
