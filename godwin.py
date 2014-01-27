@@ -143,3 +143,4 @@ except:
      print "Unexpected error:", sys.exc_info()[0]
      add_to_error(traceback.format_exc())
      time.sleep(500)
+     #Need to add comment checker to see if more comments are about nazi or not
