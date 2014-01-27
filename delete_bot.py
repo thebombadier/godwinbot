@@ -5,6 +5,12 @@ def add_to_error(id_p):
         file.write(id_p + '\n')
     file.close()
 
+def read_ban(var):    
+    f = open('ban.txt', 'r')    
+    for line in f:        
+        var.append(line)    
+        f.close()
+
 def add_to_delete(id_p):
     with open('delete.txt', 'a') as file:
         file.write(id_p + '\n')
@@ -21,12 +27,22 @@ def read_list(var):
         var.append(line)
     f.close()
     
+def add_to_ban(id_p,badsubs):    
+    with open('ban.txt', 'a') as file:        
+        file.write(id_p + '\n')    file.close()
+        if id_p not in badsubs:
+            wiki = r.get_wiki_page('godwinbot','ban')
+            r.edit_wiki_page('godwinbot','ban',wiki.content_md + "\n\n * " + id_p + "\n\n",'I was banned from' + id_p)
+        else:
+            return "Already Banned"
 r = praw.Reddit('delete negative karama comments for /u/godwin_finder by /u/the_bombadier')
 username = 'username'      
 r.login(username,'password')
 already_done = []
 read_list(already_done)
 user = r.get_redditor(username)
+badsubs = []
+read_ban(badsubs)
 try:
     while True:
         for c in user.get_comments(limit=None):
@@ -51,6 +67,17 @@ try:
                     add_to_delete(perm)
                     already_done.append(bot_comment.id) 
                     add_to_done(bot_comment.id)
+            if "you have been banned from posting to " in msg.body.lower():
+                if "/r/" + msg.athor.name  in msg.body.lower() and msg.author.name not in badsubs:
+                    sub = r.get_subreddit(str(msg.author.name))
+                    try:
+                        for post in sub.get_hot(limit=1):
+                            return "Not Banned"
+                    except Exception as e:
+                        if str(e) == '403 Client Error: Forbidden':
+                            return "Baned from: " + msg.author.name
+                            add_to_ban(str(msg.author.name),badsubs)
+                            
                      
 except:
      print "Unexpected error:", sys.exc_info()[0]
