@@ -115,7 +115,7 @@ def contains(selftext,words,sub_id,submission,done):
 			try:
 				print "why"
 				time1 =	 time_com - time_sub
-				com.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + "and " + str(amount) + str(com_word) + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + str(com_name) + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
+				com.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") +  " and " + str(amount) + str(com_word) + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + str(com_name) + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
 				
 				
 				return "Nazi reference in comment by " + com_name + " Comment: " + com_body
