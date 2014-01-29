@@ -6,12 +6,32 @@ logging.basicConfig(filename='whole.log',level=logging.WARNING)
 
 
 
-def login(name,password):
+def login():
+    name = raw_input("Username: ")
+    password = raw_input("Password: ")
     try:
 	r.login(name,password)
 	return "Logged in as: " + name
     except:
 	return "Error"
+
+def a(test_str):
+    ret = ''
+    skip1c = 0
+    skip2c = 0
+    for i in test_str:
+        if i == '[':
+            skip1c += 1
+        elif i == '(':
+            skip2c += 1
+        elif i == ']' and skip1c > 0:
+            skip1c -= 1
+        elif i == ')'and skip2c > 0:
+            skip2c -= 1
+        elif skip1c == 0 and skip2c == 0:
+            ret += i
+    return ret
+
     
 def add_to_error(id_p):
     with open('error.txt', 'a') as file:
@@ -93,7 +113,7 @@ def contains(selftext,words,sub_id,submission,done):
 			for nazi in words:
 				if not hasattr(comment, 'body'):
 					continue
-				if nazi in comment.body.lower():
+				if nazi in repr(comment.body.lower()):
 					nazi_co = nazi_co + 1
 					if nazi_co == 1:
 							sub_post = submission.subreddit
@@ -150,8 +170,8 @@ r = praw.Reddit("Godwin's Law bot by /u/the_bombadier"
 		"http://www.github.com/thebombadier/godwinbot"
 		)
 
-print login('username','password')
 
+print login()
 
 
 
