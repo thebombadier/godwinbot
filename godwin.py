@@ -6,12 +6,32 @@ logging.basicConfig(filename='whole.log',level=logging.WARNING)
 
 
 
-def login(name,password):
+def login():
+    name = raw_input("Username: ")
+    password = raw_input("Password: ")
     try:
 	r.login(name,password)
 	return "Logged in as: " + name
     except:
 	return "Error"
+
+def a(test_str):
+    ret = ''
+    skip1c = 0
+    skip2c = 0
+    for i in test_str:
+        if i == '[':
+            skip1c += 1
+        elif i == '(':
+            skip2c += 1
+        elif i == ']' and skip1c > 0:
+            skip1c -= 1
+        elif i == ')'and skip2c > 0:
+            skip2c -= 1
+        elif skip1c == 0 and skip2c == 0:
+            ret += i
+    return ret
+
     
 def add_to_error(id_p):
     with open('error.txt', 'a') as file:
@@ -93,7 +113,7 @@ def contains(selftext,words,sub_id,submission,done):
 			for nazi in words:
 				if not hasattr(comment, 'body'):
 					continue
-				if nazi in comment.body.lower():
+				if nazi in repr(comment.body.lower()):
 					nazi_co = nazi_co + 1
 					if nazi_co == 1:
 							sub_post = submission.subreddit
@@ -115,7 +135,7 @@ def contains(selftext,words,sub_id,submission,done):
 			try:
 				print "why"
 				time1 =	 time_com - time_sub
-				com.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") + "and " + str(amount) + str(com_word) + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + str(com_name) + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
+				com.reply("It took this thread " + datetime.datetime.fromtimestamp(time1).strftime("%H hours, %M minutes, %S seconds") +  " and " + str(amount) + str(com_word) + " to make a reference to the nazis, for more information look up [Godwin's Law] (http://en.wikipedia.org/wiki/Godwin's_law). \n *** \n  *^[about](http://www.reddit.com/r/godwinbot/wiki/index) ^| ^[source](https://www.github.com/thebombadier/godwinbot) ^| ^/u/" + str(com_name) + " ^can ^reply ^with ^'delete' ^to ^delete ^this ^comment. ^Additionally, ^if ^this ^gets ^a ^score ^of ^-1 ^after ^30 ^minutes ^this ^comment ^will ^be ^deleted.*" )
 				
 				
 				return "Nazi reference in comment by " + com_name + " Comment: " + com_body
@@ -146,11 +166,20 @@ def contains(selftext,words,sub_id,submission,done):
 
 	    
 r = praw.Reddit("Godwin's Law bot by /u/the_bombadier"
+<<<<<<< HEAD
 				"http://www.github.com/thebombadier/godwinbot"
 				)
 print login('godwin_finder','LYceum98')
                 
 
+=======
+
+		"http://www.github.com/thebombadier/godwinbot"
+		)
+
+
+print login()
+>>>>>>> f365ca857c3248929f2c329145935226c3d20d1b
 
 
 
