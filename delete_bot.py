@@ -40,8 +40,9 @@ def add_to_ban(id_p,badsubs):
 		return "Already Banned"
 	
 r = praw.Reddit('delete negative karama comments for /u/godwin_finder by /u/the_bombadier')
-username = 'godwin_finder'      
-r.login(username,'LYceum98')
+username = raw_input("Username: ")
+password = raw_input("Password: ")      
+r.login(username,password)
 already_done = []
 read_list(already_done)
 user = r.get_redditor(username)
