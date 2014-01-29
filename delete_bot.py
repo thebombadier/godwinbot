@@ -40,8 +40,8 @@ def add_to_ban(id_p,badsubs):
 		return "Already Banned"
 	
 r = praw.Reddit('delete negative karama comments for /u/godwin_finder by /u/the_bombadier')
-username = 'username'      
-r.login(username,'password')
+username = 'godwin_finder'      
+r.login(username,'LYceum98')
 already_done = []
 read_list(already_done)
 user = r.get_redditor(username)
@@ -52,14 +52,14 @@ while True:
 	try:
 		for c in user.get_comments(limit=None):
 		    if time.time() - c.created_utc > 1800:
-			if c.score < 0 and c.id + '\n' not in already_done:
+			if c.score < 0 and (c.id + '\n' not in already_done or c.id not in already_done):
 			    c.delete()
 			    print 'Deleted Comment in subreddit: ' + c.subreddit.display_name + " score of " + str(c.score)
 			    perm = str(c.permalink) + " Score: " + str(c.score)
 			    add_to_delete(perm)
 			    already_done.append(c.id) 
 			    add_to_done(c.id)
-		unread = r.get_inbox(limit=None)
+		unread = r.get_unread(limit=None)
 		for msg in unread:
 		    read_list(already_done)
 		    
