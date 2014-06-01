@@ -1,0 +1,90 @@
+Traceback (most recent call last):
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 183, in <module>
+    read_list(done)
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 66, in read_list
+    f = open('posts.txt', 'r')
+IOError: [Errno 2] No such file or directory: 'posts.txt'
+
+Traceback (most recent call last):
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 190, in <module>
+    print contains(selftext,words,post.id,post,done)
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 84, in contains
+    read_ban(badsubs)
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 47, in read_ban
+    f = open('ban.txt', 'r')
+IOError: [Errno 2] No such file or directory: 'ban.txt'
+
+Traceback (most recent call last):
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 190, in <module>
+    print contains(selftext,words,post.id,post,done)
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 86, in contains
+    read_list(done)
+  File "C:\Users\tom\Documents\GitHub\godwinbot\godwin.py", line 67, in read_list
+    for line in f:
+ValueError: I/O operation on closed file
+
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ changemyview
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ SubredditDrama
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ polandball
+REPLY FAILED: 403 Client Error: Forbidden @ australia
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ changemyview
+REPLY FAILED: 403 Client Error: Forbidden @ IAmA
+REPLY FAILED: 403 Client Error: Forbidden @ Futurology
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ polandball
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ australia
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ nba
+REPLY FAILED: 403 Client Error: Forbidden @ asoiaf
+REPLY FAILED: 403 Client Error: Forbidden @ politics
+REPLY FAILED: 403 Client Error: Forbidden @ SubredditDrama
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ PoliticalDiscussion
+REPLY FAILED: 403 Client Error: Forbidden @ IAmA
+REPLY FAILED: 403 Client Error: Forbidden @ changemyview
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ atheism
+Traceback (most recent call last):
+  File "C:\Users\tom\Documents\GitHub\godwinbot\delete_bot.py", line 59, in <module>
+    perm = str(c.permalink) + " Score: " + str(c.score)
+UnicodeEncodeError: 'ascii' codec can't encode character u'\u017e' in position 65: ordinal not in range(128)
+
+REPLY FAILED: 403 Client Error: Forbidden @ nba
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ atheism
+REPLY FAILED: 403 Client Error: Forbidden @ nba
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ pcgaming
+REPLY FAILED: 403 Client Error: Forbidden @ TwoXChromosomes
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ politics
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+REPLY FAILED: 403 Client Error: Forbidden @ changemyview
+Traceback (most recent call last):
+  File "godwin.py", line 192, in <module>
+    post = comment.submission
+KeyboardInterrupt
+
+REPLY FAILED: 403 Client Error: Forbidden @ atheism
+REPLY FAILED: 403 Client Error: Forbidden @ AskReddit
+Traceback (most recent call last):
+  File "delete_bot.py", line 59, in <module>
+    perm = str(c.permalink) + " Score: " + str(c.score)
+UnicodeEncodeError: 'ascii' codec can't encode character u'\xe5' in position 53: ordinal not in range(128)
+
+REPLY FAILED: coercing to Unicode: need string or buffer, Subreddit found @ AdviceAnimals
+REPLY FAILED: coercing to Unicode: need string or buffer, Subreddit found @ comicbooks
